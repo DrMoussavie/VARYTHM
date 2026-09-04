@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Varythm — Family specimen</title>
+    <link rel="stylesheet" href="../fonts/varythm.css">
+    <style>
+      :root {
+        --ink: #11100e;
+        --paper: #f2f0e8;
+        --signal: #e45b38;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      body {
+        padding: 42px 58px 34px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--ink);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font: 700 18px/1 Arial, sans-serif;
+        letter-spacing: .22em;
+      }
+
+      .mark {
+        width: 22px;
+        height: 29px;
+        background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px);
+      }
+
+      .meta,
+      .eyebrow,
+      .style-name {
+        font: 10px/1.25 "Courier New", monospace;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      .meta { text-align: right; }
+      .eyebrow { color: var(--signal); margin: 26px 0 14px; }
+
+      .headline {
+        margin: 0 0 20px;
+        font-family: "Varythm Massive", sans-serif;
+        font-size: 126px;
+        line-height: .92;
+        font-weight: 400;
+        letter-spacing: -.018em;
+        white-space: nowrap;
+      }
+
+      .rows {
+        border-top: 1px solid var(--ink);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        align-items: center;
+        min-height: 116px;
+        border-bottom: 1px solid rgba(17, 16, 14, .35);
+      }
+
+      .style-name span {
+        display: block;
+        margin-top: 8px;
+        color: #77736b;
+        font-size: 8px;
+      }
+
+      .sample {
+        overflow: hidden;
+        font-size: 70px;
+        line-height: .9;
+        white-space: nowrap;
+      }
+
+      .massive { font-family: "Varythm Massive", sans-serif; }
+      .condensed { font-family: "Varythm Condensed", sans-serif; }
+      .block { font-family: "Varythm Block", sans-serif; }
+      .slanted { font-family: "Varythm Slanted", sans-serif; }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 18px;
+        font: 9px/1.4 "Courier New", monospace;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+
+      footer strong { color: var(--signal); font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand"><span class="mark"></span>VARYTHM</div>
+      <div class="meta">Original display family / 01<br>4 styles · 136 glyphs · Latin accents</div>
+    </header>
+
+    <p class="eyebrow">Continuous barcode typography</p>
+    <h1 class="headline">ÀÉÎÕÜ · VARYTHM</h1>
+
+    <main class="rows">
+      <section class="row">
+        <div class="style-name">01 / Massive<span>Reference cut</span></div>
+        <div class="sample massive">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+      </section>
+      <section class="row">
+        <div class="style-name">02 / Condensed<span>Narrow rhythm</span></div>
+        <div class="sample condensed">0123456789 &amp; ŒUVRE ÇA</div>
+      </section>
+      <section class="row">
+        <div class="style-name">03 / Block<span>Square pressure</span></div>
+        <div class="sample block">SIGNAL / FORME + TYPE</div>
+      </section>
+      <section class="row">
+        <div class="style-name">04 / Slanted<span>Forward motion</span></div>
+        <div class="sample slanted">RYTHME, LIGNE, MATIÈRE.</div>
+      </section>
+    </main>
+
+    <footer>
+      <div>Every line remains visible.<br><strong>The letter appears through pressure.</strong></div>
+      <div>TTF · WOFF2 · SVG<br>Varythm 1.0.0 / 2026</div>
+    </footer>
+  </body>
+</html>

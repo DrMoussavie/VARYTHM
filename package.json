@@ -1,0 +1,11 @@
+{
+  "name": "varythm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A continuous barcode display typeface and generative typography tool.",
+  "scripts": {
+    "build:font": "python scripts/build_font.py",
+    "package": "python scripts/build_font.py --package-only",
+    "serve": "python -m http.server 4173"
+  }
+}

@@ -2,62 +2,47 @@
 
 # VARYTHM
 
-### Continuous barcode typeface / interactive generator.
+`TYPEFACE 01 / 2026`
 
-Four installable styles, 136 glyphs and a browser-based SVG renderer.
+**CONTINUOUS BARCODE TYPEFACE / SVG GENERATOR**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-11100e)](#download)
-[![Formats](https://img.shields.io/badge/formats-TTF%20%7C%20WOFF2-e45b38)](#font-family)
-[![Glyphs](https://img.shields.io/badge/glyphs-Latin%20%2B%20French%20accents-11100e)](#character-set)
-[![Studio](https://img.shields.io/badge/live-Varythm%20Studio-e45b38)](https://drmoussavie.github.io/VARYTHM/)
-
-[Download the complete family](releases/Varythm-1.0.0.zip) · [Open the live generator](https://drmoussavie.github.io/VARYTHM/)
+[OPEN STUDIO](https://drmoussavie.github.io/VARYTHM/) · [DOWNLOAD V1.0.0](https://github.com/DrMoussavie/VARYTHM/releases/download/v1.0.0/Varythm-1.0.0.zip) · [LICENSE](LICENSE.md)
 
 </div>
 
-![Varythm interactive studio](docs/images/varythm-studio.png)
+![Varythm family specimen](docs/images/varythm-glyphs.png)
 
-## The idea
+## 01 / STUDIO
 
-Varythm is a unicase display family and a generative typographic instrument.
-Its continuous vertical lines behave like a living barcode: each line carries
-a subtle swelling, while selected lines expand further where they cross the
-hidden geometry of a letter.
+![Varythm Studio](docs/images/varythm-studio.png)
 
-The interactive version adds seeded variations and a mouse-driven pressure
-field. The installable family freezes that system into reproducible glyphs for
-headlines, posters, motion titles and experimental identities.
+The browser tool renders text as a continuous set of vertical bars. Every bar
+stays visible. Letter shapes are produced by local changes in width.
 
-![Varythm character set](docs/images/varythm-glyphs.png)
-
-## Download
-
-The complete release is available in
-[`releases/Varythm-1.0.0.zip`](releases/Varythm-1.0.0.zip). It contains:
-
-- four installable TrueType fonts;
-- four optimized WOFF2 webfonts;
-- one CSS webfont file;
-- an individual SVG specimen for every Massive glyph;
-- the license and project documentation.
-
-For a desktop installation, download the ZIP, open the `fonts` directory and
-install the `.ttf` files. For the web, copy the `.woff2` files and adapt
-[`fonts/varythm.css`](fonts/varythm.css).
-
-## Font family
-
-| Style | Personality | File |
+| Output | Motion | Controls |
 | --- | --- | --- |
-| **Varythm Massive** | Dense, rounded, the reference configuration | [`TTF`](fonts/Varythm-Massive.ttf) · [`WOFF2`](fonts/Varythm-Massive.woff2) |
-| **Varythm Condensed** | Narrower rhythm for longer titles | [`TTF`](fonts/Varythm-Condensed.ttf) · [`WOFF2`](fonts/Varythm-Condensed.woff2) |
-| **Varythm Block** | Heavier mass with square terminals | [`TTF`](fonts/Varythm-Block.ttf) · [`WOFF2`](fonts/Varythm-Block.woff2) |
-| **Varythm Slanted** | Forward pressure and oblique movement | [`TTF`](fonts/Varythm-Slanted.ttf) · [`WOFF2`](fonts/Varythm-Slanted.woff2) |
+| SVG and PNG | fixed pointer mode or seeded playback | source weight, active bars, spacing, straight width, bulge, irregularity, pointer spread, intensity and lateral shift |
 
-Varythm works best as a display face at large sizes. It is intentionally
-unicase: lowercase input uses the same graphic language as the capitals.
+Default pointer settings: `40 / 164 / 0`.
 
-## Character set
+## 02 / DOWNLOAD
+
+The [Varythm 1.0.0 release](https://github.com/DrMoussavie/VARYTHM/releases/tag/v1.0.0) contains:
+
+- 4 installable TTF files;
+- 4 WOFF2 webfonts;
+- CSS `@font-face` declarations;
+- 136 individual Massive SVG glyphs;
+- the project license and documentation.
+
+| Style | TTF | WOFF2 |
+| --- | --- | --- |
+| Massive | [download](fonts/Varythm-Massive.ttf) | [download](fonts/Varythm-Massive.woff2) |
+| Condensed | [download](fonts/Varythm-Condensed.ttf) | [download](fonts/Varythm-Condensed.woff2) |
+| Block | [download](fonts/Varythm-Block.ttf) | [download](fonts/Varythm-Block.woff2) |
+| Slanted | [download](fonts/Varythm-Slanted.ttf) | [download](fonts/Varythm-Slanted.woff2) |
+
+## 03 / CHARACTER SET
 
 ```text
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -70,58 +55,48 @@ abcdefghijklmnopqrstuvwxyz
 ! ? . , : ; - ' " / \ & + = _ ( )
 ```
 
-Every character from the reference style is also exported individually in
-[`glyphs/svg`](glyphs/svg). Filenames use their Unicode code point, making the
-set easy to browse and reuse in specimen layouts.
+The Massive cut is also available as 136 separate files in [`glyphs/svg`](glyphs/svg).
+SVG filenames use Unicode code points.
 
-## Interactive generator
+## 04 / WEBFONT
 
-Serve this directory through any static HTTP server and open `index.html`:
+Copy the WOFF2 files and [`fonts/varythm.css`](fonts/varythm.css), then use one
+of the four family names:
 
-```bash
-python -m http.server 4173
+```css
+.title {
+  font-family: "Varythm Massive", sans-serif;
+}
 ```
 
-The generator provides controls for active lines, barcode spacing, source
-weight, swelling volume, irregularity, seeded playback, mouse diffusion,
-mouse intensity and lateral displacement. Compositions can be exported as SVG
-or PNG.
+## 05 / BUILD
 
-## Build the font
-
-The binaries are generated from the same original geometry used by the browser
-tool. No system or third-party font outline is sampled, embedded or converted.
-
-Requirements: Python 3.10+, `fontTools`, Brotli support and Node.js 18+.
+Requirements: Python 3.10+, `fontTools` with Brotli support and Node.js 18+.
 
 ```bash
 python scripts/build_font.py
 ```
 
-This command rebuilds the TTF/WOFF2 family, the individual SVG glyphs and the
-release ZIP from `alphabet.js`.
-
-## Project structure
+The build reads the original vector skeletons from `alphabet.js`, then creates
+the TTF, WOFF2, SVG and ZIP outputs.
 
 ```text
-alphabet.js                  Original vector skeletons and style profiles
-app.js                       Interactive barcode renderer
-fonts/                       Installable TTF and WOFF2 family
-glyphs/svg/                  One SVG per Massive glyph
-scripts/build_font.py        Reproducible font build
-scripts/export-glyph-data.js Bridge between browser source and font build
-docs/images/                 README screenshots
-releases/                    Ready-to-download packages
+alphabet.js                  Original glyph skeletons and style profiles
+app.js                       Interactive SVG renderer
+fonts/                       TTF, WOFF2 and CSS files
+glyphs/svg/                  Individual Massive glyphs
+scripts/build_font.py        Font build
+scripts/export-glyph-data.js Browser-to-build data bridge
+docs/images/                 Repository specimens
+releases/                    Download packages
 ```
 
-## Authorship and license
+## 06 / LICENSE
 
-The glyph geometry was drawn specifically for Varythm. Its technical
-provenance is documented in [`ORIGINAL-ALPHABET.md`](ORIGINAL-ALPHABET.md).
+Varythm is source-available, not open source. Personal, non-commercial
+evaluation is permitted. Commercial use, embedding, redistribution and
+derivative releases require written permission. See [`LICENSE.md`](LICENSE.md).
 
-This public repository is **source-available, not open source**. Personal
-evaluation is permitted; commercial use, embedding, redistribution and
-derivative releases require prior written permission. Read
-[`LICENSE.md`](LICENSE.md) before using the font or generator.
+Original drawing and build provenance: [`ORIGINAL-ALPHABET.md`](ORIGINAL-ALPHABET.md).
 
 © 2026 SAS LHOMME DEVELOPMENT AND INNOVATION.

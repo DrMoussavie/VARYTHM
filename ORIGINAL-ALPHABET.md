@@ -1,36 +1,37 @@
-# VARYTHM ORIGINALS 01–04 — provenance
+# Varythm original alphabet
 
-## Titulaire
+Varythm uses four original vector skeletons created for this project:
 
-Copyright © 2026 SAS LHOMME DEVELOPMENT AND INNOVATION. Tous droits réservés.
+- Varythm Massive;
+- Varythm Condensed;
+- Varythm Block;
+- Varythm Slanted.
 
-## Méthode de création
+These are not renamed or converted versions of existing fonts. Each character
+is defined in `alphabet.js` as points, lines and Bézier curves. The browser
+renderer and the font builder both read this same geometry.
 
-Varythm est une géométrie modulaire créée spécialement pour le générateur du
-même nom. Chaque caractère est décrit dans `alphabet.js` par des
-segments, courbes paramétriques et proportions propres au projet.
+No external font file, OpenType or TrueType outline, system glyph or webfont
+is used as a source.
 
-Aucun fichier de police externe, contour OpenType/TrueType, glyphe système ou
-dessin provenant d'une fonte tierce n'est incorporé, extrait ou converti par le
-générateur.
+## Character set
 
-## Périmètre actuel
+The first release includes:
 
-- capitales latines A–Z et minuscules unicases ;
-- chiffres 0–9 ;
-- ponctuation utile : `! ? . , : ; - ' " / \ & + = _ ( )` ;
-- ligatures Æ/Œ et leurs équivalents unicases ;
-- accents latins composés : grave, aigu, circonflexe, tilde, tréma, rond en
-  chef et cédille ;
-- quatre variantes de structure : Massive, Condensée, Bloc et Inclinée ;
-- graisse paramétrique de 60 à 180 % pour chaque variante ;
-- conversion volontaire des minuscules saisies en capitales.
+- A–Z capitals;
+- a–z unicase lowercase mappings;
+- 0–9 numerals;
+- punctuation: `! ? . , : ; - ' " / \ & + = _ ( )`;
+- Æ, æ, Œ and œ ligatures;
+- composed Latin accents: grave, acute, circumflex, tilde, dieresis, ring and cedilla.
 
-## Licence
+## Construction
 
-Le code et la géométrie ne sont pas placés sous SIL Open Font License. Ils
-restent propriétaires afin de permettre une future commercialisation avec des
-licences distinctes pour le générateur, les exports et les usages de marque.
+Every glyph starts as a hidden stroke skeleton. The renderer samples the
+distance between each vertical bar and that skeleton. All bars remain present;
+only their local width changes.
 
-Ce document décrit la provenance technique du dessin. Il ne remplace ni une
-preuve de date (par exemple une e-Soleau) ni un conseil juridique.
+The installable TTF and WOFF2 files are generated directly from those sampled
+bar outlines by `scripts/build_font.py`.
+
+Copyright © 2026 SAS LHOMME DEVELOPMENT AND INNOVATION.

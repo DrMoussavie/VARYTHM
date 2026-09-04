@@ -1,7 +1,7 @@
 /*
  * VARYTHM ORIGINALS 01–04
- * Géométrie originale dessinée pour le générateur Varythm.
- * Aucun contour de police externe n'est utilisé, incorporé ou converti ici.
+ * Original geometry drawn for the Varythm generator.
+ * No external font outline is used, embedded or converted here.
  * Copyright © 2026 SAS LHOMME DEVELOPMENT AND INNOVATION.
  */
 

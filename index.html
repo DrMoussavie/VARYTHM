@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Varythm — famille typographique et générateur interactif."
+      content="Varythm — type family and interactive generator."
     />
     <meta name="theme-color" content="#f2f0e8" />
     <meta property="og:title" content="VARYTHM — Continuous barcode typeface" />
     <meta
       property="og:description"
-      content="Quatre styles, 136 glyphes et un générateur SVG interactif."
+      content="Four styles, 136 glyphs and an interactive SVG generator."
     />
     <meta property="og:type" content="website" />
     <title>VARYTHM — continuous barcode typeface</title>
@@ -21,17 +21,17 @@
   <body>
     <main class="shell">
       <header class="topbar">
-        <a class="brand" href="#" aria-label="Varythm, accueil">
+        <a class="brand" href="#" aria-label="Varythm, home">
           <span class="brand-lines" aria-hidden="true"></span>
           <span>VARYTHM</span>
         </a>
-        <nav aria-label="Navigation principale">
+        <nav aria-label="Main navigation">
           <a href="#studio">Studio</a>
-          <a href="#family">Fontes</a>
-          <a href="#glyphs">Glyphes</a>
+          <a href="#family">Fonts</a>
+          <a href="#glyphs">Glyphs</a>
         </nav>
         <button id="randomizeTop" class="text-button" type="button">
-          <span aria-hidden="true">↝</span> Nouvelle variation
+          <span aria-hidden="true">↝</span> New variation
         </button>
       </header>
 
@@ -41,36 +41,36 @@
           <h1 id="page-title">VARYTHM</h1>
         </div>
         <div class="project-actions">
-          <a class="button secondary" href="#family">4 fontes</a>
+          <a class="button secondary" href="#family">4 fonts</a>
           <a class="button primary" href="releases/Varythm-1.0.0.zip" download>
-            Télécharger <span aria-hidden="true">↓</span>
+            Download <span aria-hidden="true">↓</span>
           </a>
         </div>
       </section>
 
-      <section id="studio" class="studio" aria-label="Générateur de lettrage">
+      <section id="studio" class="studio" aria-label="Type generator">
         <aside class="controls">
           <div class="control-block text-control">
-            <label for="textInput">Votre texte</label>
+            <label for="textInput">Text</label>
             <textarea id="textInput" rows="2" maxlength="24" spellcheck="false">VARYTHM</textarea>
-            <small>Entrée pour une seconde ligne</small>
+            <small>Press Enter for a second line</small>
           </div>
 
           <div class="control-block">
-            <label for="fontSelect">Alphabet original</label>
+            <label for="fontSelect">Original alphabet</label>
             <select id="fontSelect">
-              <option value="massive">Varythm Massive · recommandée</option>
+              <option value="massive">Varythm Massive · default</option>
               <option value="condensed">Varythm Condensed</option>
               <option value="block">Varythm Block</option>
               <option value="slanted">Varythm Slanted</option>
             </select>
-            <small class="origin-note">4 dessins propriétaires · accents inclus</small>
+            <small class="origin-note">4 original cuts · Latin accents</small>
           </div>
 
           <div class="control-block slider-list">
             <div class="range-control">
               <div class="range-heading">
-                <label for="alphabetWeight">Épaisseur de l’alphabet</label>
+                <label for="alphabetWeight">Source weight</label>
                 <output id="alphabetWeightValue" for="alphabetWeight">100</output>
               </div>
               <input id="alphabetWeight" type="range" min="60" max="180" value="100" />
@@ -78,7 +78,7 @@
 
             <div class="range-control">
               <div class="range-heading">
-                <label for="activeBars">Traits actifs / lettre</label>
+                <label for="activeBars">Active bars / letter</label>
                 <output id="activeBarsValue" for="activeBars">12</output>
               </div>
               <input id="activeBars" type="range" min="1" max="12" value="12" />
@@ -86,7 +86,7 @@
 
             <div class="range-control">
               <div class="range-heading">
-                <label for="spacing">Espacement du code-barres</label>
+                <label for="spacing">Barcode spacing</label>
                 <output id="spacingValue" for="spacing">13</output>
               </div>
               <input id="spacing" type="range" min="7" max="16" value="13" />
@@ -94,7 +94,7 @@
 
             <div class="range-control">
               <div class="range-heading">
-                <label for="thinness">Épaisseur des traits droits</label>
+                <label for="thinness">Straight bar width</label>
                 <output id="thinnessValue" for="thinness">10</output>
               </div>
               <input id="thinness" type="range" min="6" max="30" value="10" />
@@ -102,7 +102,7 @@
 
             <div class="range-control">
               <div class="range-heading">
-                <label for="bulge">Volume des boursouflures</label>
+                <label for="bulge">Bulge volume</label>
                 <output id="bulgeValue" for="bulge">69</output>
               </div>
               <input id="bulge" type="range" min="24" max="76" value="69" />
@@ -110,7 +110,7 @@
 
             <div class="range-control">
               <div class="range-heading">
-                <label for="irregularity">Irrégularité</label>
+                <label for="irregularity">Irregularity</label>
                 <output id="irregularityValue" for="irregularity">100</output>
               </div>
               <input id="irregularity" type="range" min="0" max="300" value="100" />
@@ -118,36 +118,36 @@
           </div>
 
           <div class="control-block motion-control">
-            <span class="block-label">Mouvement</span>
-            <div class="mode-switch" role="group" aria-label="Mode d’animation">
+            <span class="block-label">Motion</span>
+            <div class="mode-switch" role="group" aria-label="Motion mode">
               <button id="randomMode" type="button" aria-pressed="false">
                 <span class="mode-icon" aria-hidden="true">▶</span>
-                <span>Lecture aléatoire</span>
+                <span>Random playback</span>
               </button>
               <button id="reactiveMode" class="is-active" type="button" aria-pressed="true">
                 <span class="mode-icon" aria-hidden="true">◎</span>
-                <span>Fixe + souris</span>
+                <span>Fixed + pointer</span>
               </button>
             </div>
-            <small id="modeStatus">Bouge la souris sur le dessin</small>
+            <small id="modeStatus">Move the pointer over the preview</small>
             <div id="mouseSettings" class="mouse-settings">
               <div class="range-control">
                 <div class="range-heading">
-                  <label for="mouseSpread">Diffusion souris</label>
+                  <label for="mouseSpread">Pointer spread</label>
                   <output id="mouseSpreadValue" for="mouseSpread">40</output>
                 </div>
                 <input id="mouseSpread" type="range" min="25" max="240" value="40" />
               </div>
               <div class="range-control">
                 <div class="range-heading">
-                  <label for="mouseIntensity">Intensité souris</label>
+                  <label for="mouseIntensity">Pointer intensity</label>
                   <output id="mouseIntensityValue" for="mouseIntensity">164</output>
                 </div>
                 <input id="mouseIntensity" type="range" min="0" max="200" value="164" />
               </div>
               <div class="range-control">
                 <div class="range-heading">
-                  <label for="mousePull">Déplacement latéral</label>
+                  <label for="mousePull">Lateral shift</label>
                   <output id="mousePullValue" for="mousePull">0</output>
                 </div>
                 <input id="mousePull" type="range" min="0" max="200" value="0" />
@@ -156,30 +156,30 @@
           </div>
 
           <div class="control-block seed-control">
-            <label for="seedInput">Graine</label>
+            <label for="seedInput">Seed</label>
             <div class="seed-row">
               <input id="seedInput" type="text" value="VARYTHM-2408" maxlength="30" />
-              <button id="randomize" type="button" aria-label="Créer une nouvelle variation">↝</button>
+              <button id="randomize" type="button" aria-label="Create a new variation">↝</button>
             </div>
           </div>
 
           <div class="control-block colors">
-            <span class="block-label">Couleurs</span>
+            <span class="block-label">Colors</span>
             <label>
               <input id="inkColor" type="color" value="#11100e" />
-              Encre
+              Ink
             </label>
             <label>
               <input id="paperColor" type="color" value="#f0eee7" />
-              Papier
+              Paper
             </label>
           </div>
         </aside>
 
         <div class="preview-column">
           <div class="preview-meta">
-            <span id="barCount">— TRAITS</span>
-            <span>APERÇU VECTORIEL</span>
+            <span id="barCount">— BARS</span>
+            <span>VECTOR PREVIEW</span>
           </div>
           <div id="artboard" class="artboard">
             <svg
@@ -195,7 +195,7 @@
             <div class="actions">
               <button id="downloadPng" class="button secondary" type="button">PNG</button>
               <button id="downloadSvg" class="button primary" type="button">
-                Télécharger SVG <span aria-hidden="true">↓</span>
+                Download SVG <span aria-hidden="true">↓</span>
               </button>
             </div>
           </div>
@@ -204,27 +204,27 @@
 
       <section id="family" class="family-section" aria-labelledby="family-title">
         <div class="section-heading">
-          <p class="eyebrow">FICHIERS DE FONTES</p>
+          <p class="eyebrow">FONT FILES</p>
           <h2 id="family-title">4 styles</h2>
-          <p>Massive, Condensed, Block et Slanted. Formats TTF et WOFF2.</p>
+          <p>Massive, Condensed, Block and Slanted. TTF and WOFF2.</p>
         </div>
 
         <div class="style-specimens">
           <article class="style-specimen font-massive">
             <header><span>01</span><strong>Massive</strong><a href="fonts/Varythm-Massive.ttf" download>TTF ↓</a></header>
-            <p>RYTHME VIVANT</p>
+            <p>VARYTHM / SIGNAL</p>
           </article>
           <article class="style-specimen font-condensed">
             <header><span>02</span><strong>Condensed</strong><a href="fonts/Varythm-Condensed.ttf" download>TTF ↓</a></header>
-            <p>RYTHME VIVANT</p>
+            <p>VARYTHM / SIGNAL</p>
           </article>
           <article class="style-specimen font-block">
             <header><span>03</span><strong>Block</strong><a href="fonts/Varythm-Block.ttf" download>TTF ↓</a></header>
-            <p>RYTHME VIVANT</p>
+            <p>VARYTHM / SIGNAL</p>
           </article>
           <article class="style-specimen font-slanted">
             <header><span>04</span><strong>Slanted</strong><a href="fonts/Varythm-Slanted.ttf" download>TTF ↓</a></header>
-            <p>RYTHME VIVANT</p>
+            <p>VARYTHM / SIGNAL</p>
           </article>
         </div>
       </section>
@@ -232,15 +232,15 @@
       <section id="glyphs" class="glyph-section" aria-labelledby="glyph-title">
         <div class="section-heading compact">
           <p class="eyebrow">MASSIVE / SVG</p>
-          <h2 id="glyph-title">136 glyphes</h2>
-          <p>Capitales, unicase, chiffres, ponctuation, ligatures et accents. Chaque case télécharge son SVG.</p>
+          <h2 id="glyph-title">136 glyphs</h2>
+          <p>Capitals, unicase, numerals, punctuation, ligatures and accents. Select a glyph to download its SVG.</p>
         </div>
-        <div id="glyphGrid" class="glyph-groups" aria-label="Catalogue des glyphes Varythm"></div>
+        <div id="glyphGrid" class="glyph-groups" aria-label="Varythm glyph catalogue"></div>
       </section>
 
       <footer>
         <span>VARYTHM 1.0.0</span>
-        <span>136 GLYPHES / 4 STYLES</span>
+        <span>136 GLYPHS / 4 STYLES</span>
         <span>TTF · WOFF2 · SVG</span>
       </footer>
     </main>

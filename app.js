@@ -2,7 +2,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const alphabet = window.BARRE_ALPHABET;
 
 if (!alphabet) {
-  throw new Error("L’alphabet original Varythm n’a pas pu être chargé.");
+  throw new Error("The original Varythm alphabet could not be loaded.");
 }
 
 const ui = {
@@ -337,10 +337,10 @@ function render() {
   ui.artboard.style.setProperty("--preview-paper", settings.paper);
 
   const title = svgNode("title", { id: "svgTitle" });
-  title.textContent = `Lettrage continu « ${settings.text.replace(/\n/g, " ")} »`;
+  title.textContent = `Continuous lettering: ${settings.text.replace(/\n/g, " ")}`;
   const description = svgNode("desc", { id: "svgDesc" });
   description.textContent =
-    "Un code-barres continu dont quelques traits se boursouflent pour révéler le texte.";
+    "A continuous barcode whose local changes in width reveal the text.";
   ui.svg.append(title, description);
   ui.svg.append(svgNode("rect", { width, height, fill: settings.paper }));
 
@@ -356,7 +356,7 @@ function render() {
   ui.svg.append(group);
 
   const activeCount = specs.filter((spec) => spec.activeLines.size).length;
-  ui.barCount.textContent = `${specs.length} TRAITS · ${activeCount} ACTIFS`;
+  ui.barCount.textContent = `${specs.length} BARS · ${activeCount} ACTIVE`;
 
   latestExport = {
     width,
@@ -410,18 +410,18 @@ function randomize() {
 }
 
 const glyphGroups = [
-  { label: "Capitales", characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
-  { label: "Minuscules unicases", characters: "abcdefghijklmnopqrstuvwxyz" },
-  { label: "Chiffres", characters: "0123456789" },
+  { label: "Capitals", characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
+  { label: "Unicase lowercase", characters: "abcdefghijklmnopqrstuvwxyz" },
+  { label: "Numerals", characters: "0123456789" },
   {
-    label: "Capitales accentuées + ligatures",
+    label: "Accented capitals + ligatures",
     characters: "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖŒÙÚÛÜŸ",
   },
   {
-    label: "Minuscules accentuées + ligatures",
+    label: "Accented lowercase + ligatures",
     characters: "àáâãäåæçèéêëìíîïñòóôõöœùúûüÿ",
   },
-  { label: "Ponctuation", characters: "!?.,:;-'\"/\\&+=_()" },
+  { label: "Punctuation", characters: "!?.,:;-'\"/\\&+=_()" },
 ];
 
 function codePointLabel(character) {
@@ -448,7 +448,7 @@ function renderGlyphLibrary() {
       card.className = "glyph-card";
       card.href = `glyphs/svg/${codePoint}.svg`;
       card.download = `${codePoint}.svg`;
-      card.title = `Télécharger ${character} en SVG`;
+      card.title = `Download ${character} as SVG`;
 
       const preview = document.createElement("span");
       preview.className = "glyph-preview";
@@ -490,8 +490,8 @@ function updateMotionUi() {
     control.disabled = isRandom;
   });
   ui.modeStatus.textContent = isRandom
-    ? "Nouvelle graine automatique toutes les 1,2 s"
-    : "Bouge la souris sur le dessin";
+    ? "New seed every 1.2 seconds"
+    : "Move the pointer over the preview";
 }
 
 function setMotionMode(mode) {

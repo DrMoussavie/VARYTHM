@@ -2,10 +2,9 @@
 
 # VARYTHM
 
-### A typeface made of lines that never stop.
+### Continuous barcode typeface / interactive generator.
 
-The letter is not cut out of the barcode. Every line remains visible; the
-text appears only through local changes in thickness.
+Four installable styles, 136 glyphs and a browser-based SVG renderer.
 
 [![Version](https://img.shields.io/badge/version-1.0.0-11100e)](#download)
 [![Formats](https://img.shields.io/badge/formats-TTF%20%7C%20WOFF2-e45b38)](#font-family)

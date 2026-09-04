@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Varythm est une famille typographique générative où des lignes continues révèlent les lettres par variation d’épaisseur."
+      content="Varythm — famille typographique et générateur interactif."
     />
     <meta name="theme-color" content="#f2f0e8" />
     <meta property="og:title" content="VARYTHM — Continuous barcode typeface" />
     <meta
       property="og:description"
-      content="Composez une typographie vivante dont chaque ligne reste visible et dont les lettres apparaissent par variation d’épaisseur."
+      content="Quatre styles, 136 glyphes et un générateur SVG interactif."
     />
     <meta property="og:type" content="website" />
     <title>VARYTHM — continuous barcode typeface</title>
@@ -25,26 +25,26 @@
           <span class="brand-lines" aria-hidden="true"></span>
           <span>VARYTHM</span>
         </a>
-        <p>TYPE FAMILY + GENERATOR / 01</p>
+        <nav aria-label="Navigation principale">
+          <a href="#studio">Studio</a>
+          <a href="#family">Fontes</a>
+          <a href="#glyphs">Glyphes</a>
+        </nav>
         <button id="randomizeTop" class="text-button" type="button">
           <span aria-hidden="true">↝</span> Nouvelle variation
         </button>
       </header>
 
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">VARYTHM / CONTINUOUS BARCODE TYPE</p>
-        <h1 id="page-title">La ligne<br />ne s’arrête pas.</h1>
-        <div class="intro-copy">
-          <p class="lede">
-            Chaque barre reste visible. La lettre apparaît uniquement lorsque
-            son épaisseur change, comme une pression dans un rythme continu.
-          </p>
-          <div class="intro-actions">
-            <a class="button primary" href="releases/Varythm-1.0.0.zip" download>
-              Télécharger la famille <span aria-hidden="true">↓</span>
-            </a>
-            <a class="button secondary" href="#glyphs">Voir les glyphes</a>
-          </div>
+      <section class="project-head" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">TYPEFACE 01 / 2026</p>
+          <h1 id="page-title">VARYTHM</h1>
+        </div>
+        <div class="project-actions">
+          <a class="button secondary" href="#family">4 fontes</a>
+          <a class="button primary" href="releases/Varythm-1.0.0.zip" download>
+            Télécharger <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
 
@@ -52,7 +52,7 @@
         <aside class="controls">
           <div class="control-block text-control">
             <label for="textInput">Votre texte</label>
-            <textarea id="textInput" rows="2" maxlength="24" spellcheck="false">THOMAS</textarea>
+            <textarea id="textInput" rows="2" maxlength="24" spellcheck="false">VARYTHM</textarea>
             <small>Entrée pour une seconde ligne</small>
           </div>
 
@@ -134,23 +134,23 @@
               <div class="range-control">
                 <div class="range-heading">
                   <label for="mouseSpread">Diffusion souris</label>
-                  <output id="mouseSpreadValue" for="mouseSpread">95</output>
+                  <output id="mouseSpreadValue" for="mouseSpread">40</output>
                 </div>
-                <input id="mouseSpread" type="range" min="25" max="240" value="95" />
+                <input id="mouseSpread" type="range" min="25" max="240" value="40" />
               </div>
               <div class="range-control">
                 <div class="range-heading">
                   <label for="mouseIntensity">Intensité souris</label>
-                  <output id="mouseIntensityValue" for="mouseIntensity">100</output>
+                  <output id="mouseIntensityValue" for="mouseIntensity">164</output>
                 </div>
-                <input id="mouseIntensity" type="range" min="0" max="200" value="100" />
+                <input id="mouseIntensity" type="range" min="0" max="200" value="164" />
               </div>
               <div class="range-control">
                 <div class="range-heading">
                   <label for="mousePull">Déplacement latéral</label>
-                  <output id="mousePullValue" for="mousePull">70</output>
+                  <output id="mousePullValue" for="mousePull">0</output>
                 </div>
-                <input id="mousePull" type="range" min="0" max="200" value="70" />
+                <input id="mousePull" type="range" min="0" max="200" value="0" />
               </div>
             </div>
           </div>
@@ -191,9 +191,7 @@
             ></svg>
           </div>
           <div class="preview-footer">
-            <p>
-              Chaque trait possède une boursouflure.<br />La lettre en accentue certains.
-            </p>
+            <p>MODE SOURIS · EXPORT SVG / PNG</p>
             <div class="actions">
               <button id="downloadPng" class="button secondary" type="button">PNG</button>
               <button id="downloadSvg" class="button primary" type="button">
@@ -206,12 +204,9 @@
 
       <section id="family" class="family-section" aria-labelledby="family-title">
         <div class="section-heading">
-          <p class="eyebrow">FAMILLE / 4 STYLES INSTALLABLES</p>
-          <h2 id="family-title">Un même rythme.<br />Quatre pressions.</h2>
-          <p>
-            Massive reprend le réglage de référence. Les autres styles
-            condensent, équarrissent ou inclinent la même matière originale.
-          </p>
+          <p class="eyebrow">FICHIERS DE FONTES</p>
+          <h2 id="family-title">4 styles</h2>
+          <p>Massive, Condensed, Block et Slanted. Formats TTF et WOFF2.</p>
         </div>
 
         <div class="style-specimens">
@@ -236,12 +231,9 @@
 
       <section id="glyphs" class="glyph-section" aria-labelledby="glyph-title">
         <div class="section-heading compact">
-          <p class="eyebrow">GLYPH LIBRARY / MASSIVE 01</p>
-          <h2 id="glyph-title">Chaque signe,<br />prêt à sortir.</h2>
-          <p>
-            Capitales, minuscules unicases, chiffres, ponctuation, ligatures et
-            accents. Clique sur un caractère pour télécharger son SVG.
-          </p>
+          <p class="eyebrow">MASSIVE / SVG</p>
+          <h2 id="glyph-title">136 glyphes</h2>
+          <p>Capitales, unicase, chiffres, ponctuation, ligatures et accents. Chaque case télécharge son SVG.</p>
         </div>
         <div id="glyphGrid" class="glyph-groups" aria-label="Catalogue des glyphes Varythm"></div>
       </section>

@@ -100,7 +100,7 @@ function catmullRom(points, shouldMove = true) {
 }
 
 function readSettings() {
-  const text = ui.text.value.trim().toLocaleUpperCase("fr-FR") || "THOMAS";
+  const text = ui.text.value.trim().toLocaleUpperCase("fr-FR") || "VARYTHM";
   return {
     text,
     lines: text.split(/\r?\n/).slice(0, 2),

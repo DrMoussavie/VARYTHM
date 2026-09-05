@@ -105,11 +105,20 @@ function catmullRom(points, shouldMove = true) {
   return path;
 }
 
+function limitText(value) {
+  return value
+    .replace(/\r/g, "")
+    .split("\n")
+    .slice(0, 5)
+    .map((line) => Array.from(line).slice(0, 24).join(""))
+    .join("\n");
+}
+
 function readSettings() {
-  const text = ui.text.value.trim().toLocaleUpperCase("fr-FR") || "VARYTHM";
+  const text = limitText(ui.text.value).trim().toLocaleUpperCase("fr-FR") || "VARYTHM";
   return {
     text,
-    lines: text.split(/\r?\n/).slice(0, 2),
+    lines: text.split(/\r?\n/).slice(0, 5),
     variant: alphabet.getVariant(ui.font.value),
     alphabetWeight: Number(ui.alphabetWeight.value) / 100,
     activeBars: Number(ui.activeBars.value),
@@ -130,7 +139,7 @@ function readSettings() {
 function measureText(settings) {
   const fontSize = 220;
   const tracking = fontSize * settings.variant.trackingScale;
-  const lineHeight = 212;
+  const lineHeight = 232;
 
   const lines = settings.lines.map((text, lineIndex) => {
     let cursor = 0;
@@ -161,7 +170,11 @@ function measureText(settings) {
 }
 
 function createMaskSampler(settings, measured, layout) {
-  const scale = 1.5;
+  const maximumMaskPixels = settings.lines.length >= 3 ? 2_000_000 : 5_000_000;
+  const scale = Math.min(
+    1.5,
+    Math.sqrt(maximumMaskPixels / Math.max(1, layout.width * layout.height)),
+  );
   const canvas = document.createElement("canvas");
   canvas.width = Math.ceil(layout.width * scale);
   canvas.height = Math.ceil(layout.height * scale);
@@ -211,7 +224,7 @@ function createBarSpecs(width, settings) {
   const random = seededRandom(`${settings.seed}|${settings.text}|grid`);
   const specs = [];
   let center = settings.spacing * 0.45;
-  while (center < width && specs.length < 220) {
+  while (center < width && specs.length < 620) {
     const widthVariation = between(random, 0.82, 1.18);
     const baseWidth = Math.max(0.7, settings.spacing * settings.thinness * widthVariation);
     const requestedMaximum = settings.spacing * settings.bulge * between(random, 0.86, 1.12);
@@ -271,7 +284,14 @@ function buildBarPath(spec, settings, layout, sampleMask) {
   const endY =
     edgeMode === "loose" ? layout.coreBottom + spec.bottomEdge * edgeReach : layout.coreBottom;
   const barHeight = Math.max(1, endY - startY);
-  const rows = Math.max(70, Math.round(barHeight / 3.5));
+  const maximumRows = settings.lines.length >= 4 ? 84 : settings.lines.length === 3 ? 108 : 140;
+  const rows = Math.max(
+    64,
+    Math.min(
+      maximumRows,
+      Math.round(barHeight / (3.5 + Math.max(0, settings.lines.length - 1) * 1.35)),
+    ),
+  );
   const left = [];
   const right = [];
   const random = seededRandom(spec.randomSeed);
@@ -333,7 +353,7 @@ function render() {
   const contentHeight = measured.fontSize + (measured.lines.length - 1) * measured.lineHeight;
   const width = contentWidth + paddingX * 2;
   const coreHeight = contentHeight + paddingY * 2;
-  const edgeRoom = edgeMode === "loose" ? Math.max(64, contentHeight * 0.28) : 0;
+  const edgeRoom = edgeMode === "loose" ? Math.max(64, measured.fontSize * 0.28) : 0;
   const height = coreHeight + edgeRoom * 2;
   const coreTop = edgeRoom;
   const coreBottom = edgeRoom + coreHeight;
@@ -391,7 +411,6 @@ function render() {
     width,
     height,
     fileName: makeFileName(settings.text),
-    svg: serializeSvg(ui.svg),
   };
 }
 
@@ -588,15 +607,16 @@ function downloadBlob(blob, fileName) {
 
 function downloadSvg() {
   if (!latestExport) return;
+  const source = serializeSvg(ui.svg);
   downloadBlob(
-    new Blob([latestExport.svg], { type: "image/svg+xml;charset=utf-8" }),
+    new Blob([source], { type: "image/svg+xml;charset=utf-8" }),
     `${latestExport.fileName}.svg`,
   );
 }
 
 function downloadPng() {
   if (!latestExport) return;
-  const source = new Blob([latestExport.svg], { type: "image/svg+xml;charset=utf-8" });
+  const source = new Blob([serializeSvg(ui.svg)], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(source);
   const image = new Image();
   image.onload = () => {
@@ -623,9 +643,19 @@ rangeIds.forEach((id) => {
   });
 });
 
-[ui.text, ui.font, ui.seed, ui.ink, ui.paper].forEach((control) => {
+[ui.font, ui.seed, ui.ink, ui.paper].forEach((control) => {
   control.addEventListener("input", scheduleRender);
   control.addEventListener("change", scheduleRender);
+});
+
+ui.text.addEventListener("input", () => {
+  const limited = limitText(ui.text.value);
+  if (limited !== ui.text.value) {
+    const cursor = Math.min(ui.text.selectionStart, limited.length);
+    ui.text.value = limited;
+    ui.text.setSelectionRange(cursor, cursor);
+  }
+  scheduleRender();
 });
 
 ui.randomize.addEventListener("click", randomize);

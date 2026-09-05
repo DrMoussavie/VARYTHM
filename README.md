@@ -2,47 +2,48 @@
 
 # VARYTHM
 
-`TYPEFACE 01 / 2026`
+`TYPE FAMILY / INTERACTIVE SVG GENERATOR / 2026`
 
-**CONTINUOUS BARCODE TYPEFACE / SVG GENERATOR**
+### [OPEN THE LIVE STUDIO ↗](https://drmoussavie.github.io/VARYTHM/)
 
-[OPEN STUDIO](https://drmoussavie.github.io/VARYTHM/) · [DOWNLOAD V1.0.0](https://github.com/DrMoussavie/VARYTHM/releases/download/v1.0.0/Varythm-1.0.0.zip) · [LICENSE](LICENSE.md)
+[Download 1.0.0](https://github.com/DrMoussavie/VARYTHM/releases/download/v1.0.0/Varythm-1.0.0.zip) · [View the glyphs](#character-set) · [Read the license](LICENSE.md)
 
 </div>
 
-![Varythm family specimen](docs/images/varythm-glyphs.png)
+<a href="https://drmoussavie.github.io/VARYTHM/">
+  <img src="docs/images/varythm-glyphs.png" alt="Varythm type family specimen" width="100%">
+</a>
 
-## 01 / STUDIO
+<div align="center">
 
-![Varythm Studio](docs/images/varythm-studio.png)
+**CLICK THE SPECIMEN TO TYPE, MOVE, RANDOMIZE AND EXPORT**
 
-The browser tool renders text as a continuous set of vertical bars. Every bar
-stays visible. Letter shapes are produced by local changes in width.
+`4 CUTS` · `136 GLYPHS` · `5-LINE CANVAS` · `TTF` · `WOFF2` · `SVG` · `PNG`
 
-| Output | Motion | Controls |
+</div>
+
+## LIVE STUDIO
+
+The [browser studio](https://drmoussavie.github.io/VARYTHM/) is the controllable view of Varythm. Type up to five lines and adjust the drawing without installing anything.
+
+| Text | Ends | Motion | Export |
+| --- | --- | --- | --- |
+| 1–5 lines on one continuous field | aligned or loose, with adjustable overflow | fixed pointer response or seeded playback | editable SVG and high-resolution PNG |
+
+The vertical bars cross the complete canvas. Line breaks add new letter rows without restarting the bars.
+
+## FONT FAMILY
+
+| Cut | Format | Direct download |
 | --- | --- | --- |
-| SVG and PNG | fixed pointer mode or seeded playback | source weight, active bars, spacing, straight width, bulge, irregularity, aligned or loose ends, overflow, pointer spread, intensity and lateral shift |
+| **Massive** | TTF / WOFF2 | [TTF](fonts/Varythm-Massive.ttf) · [WOFF2](fonts/Varythm-Massive.woff2) |
+| **Condensed** | TTF / WOFF2 | [TTF](fonts/Varythm-Condensed.ttf) · [WOFF2](fonts/Varythm-Condensed.woff2) |
+| **Block** | TTF / WOFF2 | [TTF](fonts/Varythm-Block.ttf) · [WOFF2](fonts/Varythm-Block.woff2) |
+| **Slanted** | TTF / WOFF2 | [TTF](fonts/Varythm-Slanted.ttf) · [WOFF2](fonts/Varythm-Slanted.woff2) |
 
-Default pointer settings: `40 / 164 / 0`.
+The complete package is available in the [Varythm 1.0.0 release](https://github.com/DrMoussavie/VARYTHM/releases/tag/v1.0.0).
 
-## 02 / DOWNLOAD
-
-The [Varythm 1.0.0 release](https://github.com/DrMoussavie/VARYTHM/releases/tag/v1.0.0) contains:
-
-- 4 installable TTF files;
-- 4 WOFF2 webfonts;
-- CSS `@font-face` declarations;
-- 136 individual Massive SVG glyphs;
-- the project license and documentation.
-
-| Style | TTF | WOFF2 |
-| --- | --- | --- |
-| Massive | [download](fonts/Varythm-Massive.ttf) | [download](fonts/Varythm-Massive.woff2) |
-| Condensed | [download](fonts/Varythm-Condensed.ttf) | [download](fonts/Varythm-Condensed.woff2) |
-| Block | [download](fonts/Varythm-Block.ttf) | [download](fonts/Varythm-Block.woff2) |
-| Slanted | [download](fonts/Varythm-Slanted.ttf) | [download](fonts/Varythm-Slanted.woff2) |
-
-## 03 / CHARACTER SET
+## CHARACTER SET
 
 ```text
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -55,13 +56,15 @@ abcdefghijklmnopqrstuvwxyz
 ! ? . , : ; - ' " / \ & + = _ ( )
 ```
 
-The Massive cut is also available as 136 separate files in [`glyphs/svg`](glyphs/svg).
-SVG filenames use Unicode code points.
+All 136 Massive glyphs can also be downloaded separately from [`glyphs/svg`](glyphs/svg). Files are named with their Unicode code point.
 
-## 04 / WEBFONT
+## WEB USE
 
-Copy the WOFF2 files and [`fonts/varythm.css`](fonts/varythm.css), then use one
-of the four family names:
+Copy the WOFF2 files and [`fonts/varythm.css`](fonts/varythm.css), then select one of the four family names.
+
+```html
+<link rel="stylesheet" href="fonts/varythm.css">
+```
 
 ```css
 .title {
@@ -69,33 +72,27 @@ of the four family names:
 }
 ```
 
-## 05 / BUILD
+## SOURCE
 
-Requirements: Python 3.10+, `fontTools` with Brotli support and Node.js 18+.
+```text
+alphabet.js                  Original vector alphabet
+app.js                       Interactive SVG renderer
+fonts/                       TTF, WOFF2 and CSS
+glyphs/svg/                  Individual Massive glyphs
+scripts/build_font.py        Font builder
+docs/images/                 Repository specimens
+releases/                    Download packages
+```
+
+Build requirements: Python 3.10+, `fontTools` with Brotli support, and Node.js 18+.
 
 ```bash
 python scripts/build_font.py
 ```
 
-The build reads the original vector skeletons from `alphabet.js`, then creates
-the TTF, WOFF2, SVG and ZIP outputs.
+## LICENSE
 
-```text
-alphabet.js                  Original glyph skeletons and style profiles
-app.js                       Interactive SVG renderer
-fonts/                       TTF, WOFF2 and CSS files
-glyphs/svg/                  Individual Massive glyphs
-scripts/build_font.py        Font build
-scripts/export-glyph-data.js Browser-to-build data bridge
-docs/images/                 Repository specimens
-releases/                    Download packages
-```
-
-## 06 / LICENSE
-
-Varythm is source-available, not open source. Personal, non-commercial
-evaluation is permitted. Commercial use, embedding, redistribution and
-derivative releases require written permission. See [`LICENSE.md`](LICENSE.md).
+Varythm is source-available. Personal, non-commercial evaluation is permitted. Commercial use, embedding, redistribution and derivative releases require written permission. See [`LICENSE.md`](LICENSE.md).
 
 Original drawing and build provenance: [`ORIGINAL-ALPHABET.md`](ORIGINAL-ALPHABET.md).
 

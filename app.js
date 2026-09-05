@@ -54,7 +54,7 @@ let renderFrame = null;
 let latestExport = null;
 let randomLoopTimer = null;
 let motionMode = "reactive";
-let edgeMode = "aligned";
+let edgeMode = "loose";
 const pointer = { x: 0, y: 0, inside: false };
 
 function hashSeed(value) {
@@ -224,8 +224,8 @@ function createBarSpecs(width, settings) {
       ambientCenter: between(random, 0.28, 0.72),
       ambientSpread: between(random, 0.11, 0.24),
       ambientStrength: between(random, 0.28, 0.46),
-      topEdge: between(random, -1, 0.35),
-      bottomEdge: between(random, -0.35, 1),
+      topEdge: between(random, -1.15, 0.55),
+      bottomEdge: between(random, -0.55, 1.15),
     });
     center += settings.spacing * between(random, 0.96, 1.04);
   }
@@ -333,7 +333,7 @@ function render() {
   const contentHeight = measured.fontSize + (measured.lines.length - 1) * measured.lineHeight;
   const width = contentWidth + paddingX * 2;
   const coreHeight = contentHeight + paddingY * 2;
-  const edgeRoom = edgeMode === "loose" ? Math.max(34, contentHeight * 0.16) : 0;
+  const edgeRoom = edgeMode === "loose" ? Math.max(64, contentHeight * 0.28) : 0;
   const height = coreHeight + edgeRoom * 2;
   const coreTop = edgeRoom;
   const coreBottom = edgeRoom + coreHeight;
@@ -543,6 +543,7 @@ function updateEdgeUi() {
   ui.alignedEdges.setAttribute("aria-pressed", String(!isLoose));
   ui.looseEdges.classList.toggle("is-active", isLoose);
   ui.looseEdges.setAttribute("aria-pressed", String(isLoose));
+  ui.artboard.classList.toggle("has-loose-edges", isLoose);
   ui.edgeSettings.classList.toggle("is-disabled", !isLoose);
   ui.edgeOverflow.disabled = !isLoose;
 }

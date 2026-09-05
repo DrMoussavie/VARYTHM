@@ -120,22 +120,22 @@
           <div class="control-block edge-control">
             <span class="block-label">Ends</span>
             <div class="mode-switch" role="group" aria-label="Bar ends">
-              <button id="alignedEdges" class="is-active" type="button" aria-pressed="true">
+              <button id="alignedEdges" type="button" aria-pressed="false">
                 <span class="mode-icon" aria-hidden="true">▥</span>
                 <span>Aligned</span>
               </button>
-              <button id="looseEdges" type="button" aria-pressed="false">
+              <button id="looseEdges" class="is-active" type="button" aria-pressed="true">
                 <span class="mode-icon" aria-hidden="true">≋</span>
                 <span>Loose</span>
               </button>
             </div>
-            <div id="edgeSettings" class="edge-settings is-disabled">
+            <div id="edgeSettings" class="edge-settings">
               <div class="range-control">
                 <div class="range-heading">
                   <label for="edgeOverflow">Overflow</label>
-                  <output id="edgeOverflowValue" for="edgeOverflow">62</output>
+                  <output id="edgeOverflowValue" for="edgeOverflow">82</output>
                 </div>
-                <input id="edgeOverflow" type="range" min="10" max="100" value="62" disabled />
+                <input id="edgeOverflow" type="range" min="10" max="100" value="82" />
               </div>
             </div>
           </div>

@@ -370,6 +370,17 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0.28;
 }
 
+.edge-settings {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline);
+  transition: opacity 160ms ease;
+}
+
+.edge-settings.is-disabled {
+  opacity: 0.28;
+}
+
 .colors {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -14,6 +14,10 @@ const ui = {
   thinness: document.querySelector("#thinness"),
   bulge: document.querySelector("#bulge"),
   irregularity: document.querySelector("#irregularity"),
+  edgeOverflow: document.querySelector("#edgeOverflow"),
+  edgeSettings: document.querySelector("#edgeSettings"),
+  alignedEdges: document.querySelector("#alignedEdges"),
+  looseEdges: document.querySelector("#looseEdges"),
   mouseSpread: document.querySelector("#mouseSpread"),
   mouseIntensity: document.querySelector("#mouseIntensity"),
   mousePull: document.querySelector("#mousePull"),
@@ -40,6 +44,7 @@ const rangeIds = [
   "thinness",
   "bulge",
   "irregularity",
+  "edgeOverflow",
   "mouseSpread",
   "mouseIntensity",
   "mousePull",
@@ -49,6 +54,7 @@ let renderFrame = null;
 let latestExport = null;
 let randomLoopTimer = null;
 let motionMode = "reactive";
+let edgeMode = "aligned";
 const pointer = { x: 0, y: 0, inside: false };
 
 function hashSeed(value) {
@@ -111,6 +117,7 @@ function readSettings() {
     thinness: Number(ui.thinness.value) / 100,
     bulge: Number(ui.bulge.value) / 100,
     irregularity: Number(ui.irregularity.value) / 100,
+    edgeOverflow: Number(ui.edgeOverflow.value) / 100,
     mouseSpread: Number(ui.mouseSpread.value),
     mouseIntensity: Number(ui.mouseIntensity.value) / 100,
     mousePull: Number(ui.mousePull.value) / 100,
@@ -217,6 +224,8 @@ function createBarSpecs(width, settings) {
       ambientCenter: between(random, 0.28, 0.72),
       ambientSpread: between(random, 0.11, 0.24),
       ambientStrength: between(random, 0.28, 0.46),
+      topEdge: between(random, -1, 0.35),
+      bottomEdge: between(random, -0.35, 1),
     });
     center += settings.spacing * between(random, 0.96, 1.04);
   }
@@ -255,8 +264,14 @@ function assignActiveBars(specs, measured, layout, activeBarCount) {
   });
 }
 
-function buildBarPath(spec, height, settings, layout, sampleMask) {
-  const rows = Math.max(70, Math.round(height / 3.5));
+function buildBarPath(spec, settings, layout, sampleMask) {
+  const edgeReach = layout.edgeRoom * settings.edgeOverflow;
+  const startY =
+    edgeMode === "loose" ? layout.coreTop + spec.topEdge * edgeReach : layout.coreTop;
+  const endY =
+    edgeMode === "loose" ? layout.coreBottom + spec.bottomEdge * edgeReach : layout.coreBottom;
+  const barHeight = Math.max(1, endY - startY);
+  const rows = Math.max(70, Math.round(barHeight / 3.5));
   const left = [];
   const right = [];
   const random = seededRandom(spec.randomSeed);
@@ -265,7 +280,7 @@ function buildBarPath(spec, height, settings, layout, sampleMask) {
 
   for (let row = 0; row <= rows; row += 1) {
     const progress = row / rows;
-    const y = progress * height;
+    const y = startY + progress * barHeight;
     const lineIndex = layout.lineBands.findIndex((band) => y >= band.top && y <= band.bottom);
     const canBulge = lineIndex >= 0 && spec.activeLines.has(lineIndex);
     const amount = canBulge ? sampleMask(spec.center, y) : 0;
@@ -317,15 +332,29 @@ function render() {
   const contentWidth = Math.max(...measured.lines.map((line) => line.width));
   const contentHeight = measured.fontSize + (measured.lines.length - 1) * measured.lineHeight;
   const width = contentWidth + paddingX * 2;
-  const height = contentHeight + paddingY * 2;
+  const coreHeight = contentHeight + paddingY * 2;
+  const edgeRoom = edgeMode === "loose" ? Math.max(34, contentHeight * 0.16) : 0;
+  const height = coreHeight + edgeRoom * 2;
+  const coreTop = edgeRoom;
+  const coreBottom = edgeRoom + coreHeight;
   const baselines = measured.lines.map(
-    (_, lineIndex) => paddingY + measured.fontSize + lineIndex * measured.lineHeight,
+    (_, lineIndex) => coreTop + paddingY + measured.fontSize + lineIndex * measured.lineHeight,
   );
   const lineBands = baselines.map((baseline) => ({
     top: baseline - measured.fontSize,
     bottom: baseline + measured.fontSize * 0.06,
   }));
-  const layout = { width, height, paddingX, paddingY, baselines, lineBands };
+  const layout = {
+    width,
+    height,
+    paddingX,
+    paddingY,
+    baselines,
+    lineBands,
+    edgeRoom,
+    coreTop,
+    coreBottom,
+  };
 
   const sampleMask = createMaskSampler(settings, measured, layout);
   const specs = createBarSpecs(width, settings);
@@ -348,7 +377,7 @@ function render() {
   specs.forEach((spec) => {
     group.append(
       svgNode("path", {
-        d: buildBarPath(spec, height, settings, layout, sampleMask),
+        d: buildBarPath(spec, settings, layout, sampleMask),
         "data-active": spec.activeLines.size ? "true" : "false",
       }),
     );
@@ -508,6 +537,22 @@ function setMotionMode(mode) {
   }
 }
 
+function updateEdgeUi() {
+  const isLoose = edgeMode === "loose";
+  ui.alignedEdges.classList.toggle("is-active", !isLoose);
+  ui.alignedEdges.setAttribute("aria-pressed", String(!isLoose));
+  ui.looseEdges.classList.toggle("is-active", isLoose);
+  ui.looseEdges.setAttribute("aria-pressed", String(isLoose));
+  ui.edgeSettings.classList.toggle("is-disabled", !isLoose);
+  ui.edgeOverflow.disabled = !isLoose;
+}
+
+function setEdgeMode(mode) {
+  edgeMode = mode;
+  updateEdgeUi();
+  scheduleRender();
+}
+
 function updatePointer(event) {
   if (motionMode !== "reactive" || !latestExport) return;
   const bounds = ui.artboard.getBoundingClientRect();
@@ -586,6 +631,8 @@ ui.randomize.addEventListener("click", randomize);
 ui.randomizeTop.addEventListener("click", randomize);
 ui.randomMode.addEventListener("click", () => setMotionMode("random"));
 ui.reactiveMode.addEventListener("click", () => setMotionMode("reactive"));
+ui.alignedEdges.addEventListener("click", () => setEdgeMode("aligned"));
+ui.looseEdges.addEventListener("click", () => setEdgeMode("loose"));
 ui.artboard.addEventListener("pointermove", updatePointer);
 ui.artboard.addEventListener("pointerleave", () => {
   if (!pointer.inside) return;
@@ -596,5 +643,6 @@ ui.downloadSvg.addEventListener("click", downloadSvg);
 ui.downloadPng.addEventListener("click", downloadPng);
 
 updateMotionUi();
+updateEdgeUi();
 renderGlyphLibrary();
 render();

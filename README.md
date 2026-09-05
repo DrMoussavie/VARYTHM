@@ -21,7 +21,7 @@ stays visible. Letter shapes are produced by local changes in width.
 
 | Output | Motion | Controls |
 | --- | --- | --- |
-| SVG and PNG | fixed pointer mode or seeded playback | source weight, active bars, spacing, straight width, bulge, irregularity, pointer spread, intensity and lateral shift |
+| SVG and PNG | fixed pointer mode or seeded playback | source weight, active bars, spacing, straight width, bulge, irregularity, aligned or loose ends, overflow, pointer spread, intensity and lateral shift |
 
 Default pointer settings: `40 / 164 / 0`.
 
